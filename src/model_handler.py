@@ -4,13 +4,12 @@ import random
 from src.input_handler import build_data_loader
 from src.modeling import BiLSTMClassifier, BowClassifier
 from src.output_handler import calculate_evaluation_results
-
 random.seed(1)
 torch.manual_seed(1)
 
 
 class ModelHandler:
-    def __init__(self, config, char_to_id, embedding_matrix=None, model_path=None):
+    def __init__(self, config, num_words, embedding_matrix=None, model_path=None):
         self.config = config
         self.model = None
         # used to store the model weights that achieve the best accuracy on development during training
@@ -18,11 +17,11 @@ class ModelHandler:
 
         # build BiLSTM model
         if self.config['PARAMETER']['model_selection'] == 'BiLSTM':
-            self.model = BiLSTMClassifier(config=self.config, num_words=len(char_to_id),
+            self.model = BiLSTMClassifier(config=self.config, num_words=num_words,
                                           embedding_matrix=embedding_matrix)
         # build Bag of Word (BoW) model
         elif self.config['PARAMETER']['model_selection'] == 'BoW':
-            self.model = BowClassifier(config=self.config, num_words=len(char_to_id), embedding_matrix=embedding_matrix)
+            self.model = BowClassifier(config=self.config, num_words=num_words, embedding_matrix=embedding_matrix)
         if model_path:
             # if model_path is specified, load the model
             self.load_model(model_path)

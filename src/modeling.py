@@ -12,8 +12,9 @@ class BiLSTMClassifier(nn.ModuleList):
         self.lstm_layers = int(config['PARAMETER']['lstm_layers'])
         self.lstm_hidden_dim = int(config['PARAMETER']['lstm_hidden_dim'])
 
-        # use pre-trained embedding
+        # embedding layer
         if embedding_matrix is not None:
+            # use pre-trained embedding
             if config['PARAMETER']['freeze'] == 'True':
                 # freeze the embedding layer and the parameters will not update during training
                 self.embedding = nn.Embedding.from_pretrained(embedding_matrix, freeze=True)
@@ -24,8 +25,10 @@ class BiLSTMClassifier(nn.ModuleList):
             # randomly initialize the embedding layer (the parameters will update during training)
             self.embedding = nn.Embedding(num_words, self.embedding_dim)
 
+        # BiLSTM layer to generate sentence embedding from word embedding
         self.lstm = nn.LSTM(input_size=self.embedding_dim, hidden_size=self.lstm_hidden_dim,
                             num_layers=self.lstm_layers, batch_first=True, bidirectional=True)
+        # classification layer to generate the final classification
         self.fully_connected_layer = nn.Linear(in_features=self.lstm_hidden_dim * 2, out_features=50)
 
     def forward(self, x):
@@ -45,6 +48,7 @@ class BowClassifier(nn.Module):
         super(BowClassifier, self).__init__()
         self.embedding_dim = int(config['PARAMETER']['embedding_dim'])
 
+        # embedding layer
         if embedding_matrix is not None:
             if config['PARAMETER']['freeze'] == 'True':
                 self.embedding = nn.Embedding.from_pretrained(embedding_matrix, freeze=True)
@@ -53,10 +57,12 @@ class BowClassifier(nn.Module):
         else:
             self.embedding = nn.Embedding(num_words, self.embedding_dim)
 
+        # classification layer to generate the final classification
         self.fully_connected_layer = nn.Linear(self.embedding_dim, 50)
 
     def forward(self, sentence):
         x = self.embedding(sentence)
+        # BoW layer to generate sentence embedding from word embedding
         x = torch.mean(x, dim=1)
         x = self.fully_connected_layer(x)
         return x

@@ -43,9 +43,9 @@ def write_result(config, sentence, true, prediction, f1, accuracy):
     id_to_label = get_id_to_label(config['PATH']['label_to_id_path'])
     max_length = max([len(s) for s in sentence])
     with open(config['PATH']['result_path'], 'w') as result:
-        result.write('Accuracy on testing set: ' + str(accuracy))
+        result.write('Accuracy on test set: ' + str(accuracy))
         result.write('\n')
-        result.write('F1-score on testing set: ' + str(f1))
+        result.write('F1-score on test set: ' + str(f1))
         result.write('\n\n')
         space = " " * (max_length - 1 - len('Sentence'))
         result.write('Sentence' + space + '(True label, Prediction)')
@@ -62,8 +62,8 @@ def result_evaluation(config, sentence, true, predict):
     print('-------------------Start testing-------------------')
     # calculate accuracy and f1 score
     accuracy, f1 = calculate_evaluation_results(predict, true)
-    print('Accuracy on testing set:', accuracy)
-    print('F1 score on testing set:', f1)
+    print('Accuracy on test set:', accuracy)
+    print('F1 score on test set:', f1)
     # write the evaluation results
     predict, true = transform_output(predict, true)
     write_result(config, sentence, true, predict, f1, accuracy)
