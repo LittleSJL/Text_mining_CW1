@@ -4,7 +4,7 @@ from src.input_handler import read_config_file, InputHandler
 
 
 # read configuration file
-config_path = "../data/bilstm_random_finetune.ini"
+config_path = "../data/bow_glove_finetune.ini"
 config = read_config_file(config_path)
 # build preprocessor
 preprocessor = InputHandler(config)

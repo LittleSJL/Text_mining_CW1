@@ -2,8 +2,9 @@ import os
 import torch
 import random
 from src.input_handler import build_data_loader
-from src.modeling import BiLSTMClassifier, BowClassifier
+from src.modeling import BiLSTMClassifier, BowClassifier, BowBiLSTMClassifier
 from src.output_handler import calculate_evaluation_results
+
 random.seed(1)
 torch.manual_seed(1)
 
@@ -22,8 +23,11 @@ class ModelHandler:
         # build Bag of Word (BoW) model
         elif self.config['PARAMETER']['model_selection'] == 'BoW':
             self.model = BowClassifier(config=self.config, num_words=num_words, embedding_matrix=embedding_matrix)
+        # build BoW_BiLSTM model
+        elif self.config['PARAMETER']['model_selection'] == 'BoWBiLSTM':
+            self.model = BowBiLSTMClassifier(config=self.config, num_words=num_words, embedding_matrix=embedding_matrix)
+        # if model_path is specified, load the model
         if model_path:
-            # if model_path is specified, load the model
             self.load_model(model_path)
 
     def train(self, x_train, y_train, x_dev, y_dev):
@@ -55,7 +59,7 @@ class ModelHandler:
                 loss_list.append(loss.detach().numpy())
             # loss and accuracy on training set
             loss_train = sum(loss_list) / len(loss_list)
-            accuracy_train = sum(accuracy_list)/len(accuracy_list)
+            accuracy_train = sum(accuracy_list) / len(accuracy_list)
             # test the model on development set
             pred_dev = self.test(x_dev)
             accuracy_dev, _ = calculate_evaluation_results(pred_dev, y_dev)
