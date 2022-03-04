@@ -11,6 +11,7 @@ preprocessor = InputHandler(config)
 
 # firstly set is_training = True: run the code to train and save the model
 # then set is_training = False: run the code to load, test the model and write the evaluation results
+'变了吗'
 is_training = False
 if is_training:
     # load and pre-process the training data and dev data for training
