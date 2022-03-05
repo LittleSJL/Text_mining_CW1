@@ -2,8 +2,8 @@ import os
 import torch
 import random
 from src.input_handler import build_data_loader
+from src.output_handler import calculate_accruacy_during_training
 from src.modeling import BiLSTMClassifier, BowClassifier, BowBiLSTMClassifier
-from src.output_handler import calculate_evaluation_results
 
 random.seed(1)
 torch.manual_seed(1)
@@ -15,11 +15,12 @@ class ModelHandler:
         self.model = None
         # used to store the model weights that achieve the best accuracy on development during training
         self.best_model_state = None
+        self.build_model(num_words, embedding_matrix, model_path)
 
+    def build_model(self, num_words, embedding_matrix, model_path):
         # build BiLSTM model
         if self.config['PARAMETER']['model_selection'] == 'BiLSTM':
-            self.model = BiLSTMClassifier(config=self.config, num_words=num_words,
-                                          embedding_matrix=embedding_matrix)
+            self.model = BiLSTMClassifier(config=self.config, num_words=num_words, embedding_matrix=embedding_matrix)
         # build Bag of Word (BoW) model
         elif self.config['PARAMETER']['model_selection'] == 'BoW':
             self.model = BowClassifier(config=self.config, num_words=num_words, embedding_matrix=embedding_matrix)
@@ -54,15 +55,15 @@ class ModelHandler:
                 loss.backward()
                 optimizer.step()
                 # calculate and store the accuracy as well as loss during training
-                accuracy_training, _ = calculate_evaluation_results(y_pred, y_batch)
+                accuracy_training = calculate_accruacy_during_training(y_pred, y_batch)
                 accuracy_list.append(accuracy_training)
                 loss_list.append(loss.detach().numpy())
             # loss and accuracy on training set
             loss_train = sum(loss_list) / len(loss_list)
             accuracy_train = sum(accuracy_list) / len(accuracy_list)
             # test the model on development set
-            pred_dev = self.test(x_dev)
-            accuracy_dev, _ = calculate_evaluation_results(pred_dev, y_dev)
+            pred_dev = self.predict(x_dev)
+            accuracy_dev = calculate_accruacy_during_training(pred_dev, y_dev)
 
             # update training states for accuracy and early stopping
             if accuracy_dev > best_dev_accuracy:
@@ -86,7 +87,8 @@ class ModelHandler:
         print("Best accuracy on development set:", best_dev_accuracy)
         self.save_model()
 
-    def test(self, x_test):
+    def predict(self, x_test):
+        # take a question as input and output the classification result (one-hot encoding tensor)
         self.model.eval()
         with torch.no_grad():
             y_pred = self.model(x_test)
@@ -94,10 +96,12 @@ class ModelHandler:
         return y_pred
 
     def save_model(self):
+        # save the best model in training process
         print('Saving the best model to', self.config['PATH']['model_path'], '\n')
         save_model_path = os.path.join(self.config['PATH']['model_path'])
         torch.save(self.best_model_state, save_model_path)
 
     def load_model(self, path):
+        # load pre-trained model in training process
         print('Loading model from', path, '\n')
         self.model.load_state_dict(torch.load(path))

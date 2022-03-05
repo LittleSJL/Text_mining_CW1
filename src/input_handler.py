@@ -11,6 +11,20 @@ random.seed(1)
 torch.manual_seed(1)
 
 
+def load_config_file(config_path):
+    """
+    Read configuration file:
+        Embedding selection: [Glove, Random initialize]
+        Freeze or Fine-tune: [Freeze, Fine-tune]
+        Model selection: [BiLSTM, BoW, BoWBiLSTM]
+    """
+    config = configparser.ConfigParser()
+    config.read(config_path)  # 7 different configuration files
+    config.sections()
+    print_info(config)
+    return config
+
+
 def print_info(config):
     """
     print different config settings
@@ -21,20 +35,6 @@ def print_info(config):
     else:
         print('Freeze or fine-tune: Fine-tune')
     print('Model selection:', config['PARAMETER']['model_selection'])
-
-
-def read_config_file(config_path):
-    """
-    Read configuration file:
-        Embedding selection: [Glove, Random initialize]
-        Freeze or Fine-tune: [Freeze, Fine-tune]
-        Model selection: [BiLSTM, BoW]
-    """
-    config = configparser.ConfigParser()
-    config.read(config_path)  # 6 different configuration files
-    config.sections()
-    print_info(config)
-    return config
 
 
 def load_stopwords(stopwords_path):
@@ -48,11 +48,11 @@ def load_stopwords(stopwords_path):
     return stopwords_list
 
 
-def load_mapping(path):
+def load_mapping(mapping_path):
     """
     load char_to_id file or label_to_id file
     """
-    with open(path, "rb") as f:
+    with open(mapping_path, "rb") as f:
         mapping = pickle.load(f)
     return mapping
 
@@ -139,7 +139,7 @@ def load_data(data_path, stopwords):
 
 def convert_sentence_to_vectors(char_to_id, sentence, max_length):
     """
-    convert a text sentence to a fixed-length(max_length) vectors by mapping each token to its unique id
+    convert a text sentence to a fixed-length(max_length) tensor vectors by mapping each token to its unique id
     """
     sentence_vector = torch.zeros(max_length, dtype=torch.int)
     counter = -1
@@ -155,7 +155,7 @@ def convert_sentence_to_vectors(char_to_id, sentence, max_length):
 
 def convert_label_to_one_hot_encoding(label_to_id, label):
     """
-    convert a text label to one-hot encoding
+    convert a text label to one-hot encoding tensor
     """
     label_vector = torch.zeros(len(label_to_id))
     label_vector[label_to_id.get(label) - 1] = 1
@@ -164,7 +164,7 @@ def convert_label_to_one_hot_encoding(label_to_id, label):
 
 def build_data_loader(sentence_list, label_list, batch_size=1):
     """
-    concatenate the sentence and label to build data loader
+    concatenate the sentence and label then build data loader
     """
     concat_sentence_label = []
     for i in range(len(sentence_list)):
@@ -197,6 +197,23 @@ class InputHandler:
     def get_char_to_id(self):
         return self.char_to_id
 
+    def get_embedding_matrix(self):
+        """
+        load pre-trained embedding file and create embedding matrix
+        """
+        if self.config['PARAMETER']['embedding_selection'] == 'Random initialize':
+            return None
+        else:
+            word2vec = load_embedding_dic(self.config['PATH']['embedding_path'])
+            vocab_size = len(self.char_to_id)
+            embedding_matrix = np.zeros((vocab_size, int(self.config['PARAMETER']['embedding_dim'])))
+            for word, i in self.char_to_id.items():
+                embedding_vector = word2vec.get(word)
+                if embedding_vector is not None:
+                    # words not found in embedding index will be all zeros.
+                    embedding_matrix[i] = embedding_vector
+            return torch.from_numpy(embedding_matrix).float()
+
     def transform_input(self, sentences, labels):
         # transform sentences from text to vectors
         sentence_vectors = torch.zeros(len(sentences), int(self.config['PARAMETER']['max_len']), dtype=torch.int)
@@ -214,20 +231,3 @@ class InputHandler:
             counter += 1
 
         return sentence_vectors, one_hot_encoding_label
-
-    def get_embedding_matrix(self):
-        """
-        load pre-trained embedding file and create embedding matrix
-        """
-        if self.config['PARAMETER']['embedding_selection'] == 'Random initialize':
-            return None
-        else:
-            word2vec = load_embedding_dic(self.config['PATH']['embedding_path'])
-            vocab_size = len(self.char_to_id)
-            embedding_matrix = np.zeros((vocab_size, int(self.config['PARAMETER']['embedding_dim'])))
-            for word, i in self.char_to_id.items():
-                embedding_vector = word2vec.get(word)
-                if embedding_vector is not None:
-                    # words not found in embedding index will be all zeros.
-                    embedding_matrix[i] = embedding_vector
-            return torch.from_numpy(embedding_matrix).float()
