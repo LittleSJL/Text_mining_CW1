@@ -8,9 +8,9 @@ def transform_output(one_hot_predict, one_hot_true):
     """
     transform one-hot encoding tensor to numpy int label
     """
-    prediction = one_hot_predict.detach().numpy()  # convert tensor to numpy
+    prediction = one_hot_predict.cpu().detach().numpy()  # convert tensor to numpy
     prediction = np.argmax(prediction, axis=1)  # select the largest probability as the prediction label
-    true = one_hot_true.detach().numpy()
+    true = one_hot_true.cpu().detach().numpy()
     true = np.argmax(true, axis=1)
     return prediction, true
 
@@ -37,14 +37,16 @@ def get_classes(int_predict, int_true, id_to_label):
     return text_classes
 
 
-def calculate_accruacy_during_training(one_hot_predict, one_hot_true):
+def evaluate_during_training(one_hot_predict, one_hot_true):
     """
-    used for calculating the accuracy during training
+    used for evaluate the model during training
     """
+    # transform the output from model
     int_predict, int_true = transform_output(one_hot_predict, one_hot_true)
-    # calculate the accuracy
+    # calculate the accuracy and f1 score
     accuracy = accuracy_score(int_predict, int_true)
-    return accuracy
+    weighted_f1 = f1_score(int_true, int_predict, average='weighted')
+    return weighted_f1
 
 
 def plot_confusion_matrix_figure(true, predict, classes, save_img_path):
@@ -72,7 +74,9 @@ class OutputHandler:
     def __init__(self, config, raw_sentence):
         self.config = config
         self.accuracy = 0
-        self.f1_total = 0
+        self.micro_f1 = 0
+        self.macro_f1 = 0
+        self.weighted_f1 = 0
         self.f1_each_class = None
         self.confusion_matrix_result = None
         self.raw_sentence = raw_sentence
@@ -84,8 +88,8 @@ class OutputHandler:
     def result_evaluation(self, one_hot_predict, one_hot_true):
         """
         Evaluate the model:
-        (1) calculate the accuracy
-        (2) calculate the weighted F1 score, F1 score for each class
+        (1) calculate the accuracy, three types of F1 score (micro, macro, weighted)
+        (2) F1 score for each class
         (3) calculate the confusion matrix
         """
         int_predict, int_true = transform_output(one_hot_predict, one_hot_true)
@@ -93,19 +97,23 @@ class OutputHandler:
         self.int_predict = int_predict
         # calculate the accuracy and f1 score
         self.accuracy = accuracy_score(int_predict, int_true)
-        self.f1_total = f1_score(int_true, int_predict, average='weighted')
+        self.micro_f1 = f1_score(int_true, int_predict, average='micro')
+        self.macro_f1 = f1_score(int_true, int_predict, average='macro')
+        self.weighted_f1 = f1_score(int_true, int_predict, average='weighted')
         self.f1_each_class = f1_score(int_true, int_predict, average=None)
         self.text_classes = get_classes(int_predict, int_true, self.id_to_label)
         plot_confusion_matrix_figure(int_predict, int_true, self.text_classes,
                                      self.config['PATH']['confusion_martix_path'])
         self.confusion_matrix_result = confusion_matrix(int_true, int_predict)
         print("Accuracy on the test set:", self.accuracy)
-        print("F1 score on the test set:", self.f1_total)
+        print("Micro F1 score on the test set:", self.micro_f1)
+        print("Macro F1 score on the test set:", self.macro_f1)
+        print("Weighted F1 score on the test set:", self.weighted_f1)
 
     def write_result(self):
         """
         write the evaluation results
-        (1) accuracy and total weighted f1 score
+        (1) accuracy and total three types of f1 score (micro, macro, weighted)
         (2) f1 score of each class
         (3) write the original sentence, prediction label and true label for each testing question
         """
@@ -118,7 +126,11 @@ class OutputHandler:
         with open(self.config['PATH']['result_path'], 'w') as result:
             result.write('Accuracy on test set: ' + str(self.accuracy))
             result.write('\n')
-            result.write('F1-score on test set: ' + str(self.f1_total))
+            result.write('Micro F1-score on test set: ' + str(self.micro_f1))
+            result.write('\n')
+            result.write('Macro F1-score on test set: ' + str(self.macro_f1))
+            result.write('\n')
+            result.write('Weighted F1-score on test set: ' + str(self.weighted_f1))
             result.write('\n\n')
             for item in class_f1_sorted:
                 result.write(item[0] + ': ' + str(item[1]))

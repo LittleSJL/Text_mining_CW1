@@ -1,10 +1,10 @@
-from src.model_handler import ModelHandler
-from src.output_handler import OutputHandler
-from src.input_handler import load_config_file, InputHandler
+from model_handler import ModelHandler
+from output_handler import OutputHandler
+from input_handler import load_config_file, InputHandler
 
 
 # read configuration file
-config_path = "../data/bowbilstm_glove_finetune.ini"
+config_path = "../data/bilstm_glove_finetune.ini"
 config = load_config_file(config_path)
 # build input_handler
 input_handler = InputHandler(config)

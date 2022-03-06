@@ -6,8 +6,9 @@ torch.manual_seed(1)
 
 
 class BowClassifier(nn.Module):
-    def __init__(self, config, num_words, embedding_matrix=None):
+    def __init__(self, config, num_words, embedding_matrix=None, device=None):
         super(BowClassifier, self).__init__()
+        self.device = device
         self.embedding_dim = int(config['PARAMETER']['embedding_dim'])
 
         # embedding layer
@@ -31,8 +32,9 @@ class BowClassifier(nn.Module):
 
 
 class BiLSTMClassifier(nn.ModuleList):
-    def __init__(self, config, num_words, embedding_matrix=None):
+    def __init__(self, config, num_words, embedding_matrix=None, device=None):
         super().__init__()
+        self.device = device
         self.embedding_dim = int(config['PARAMETER']['embedding_dim'])
         self.lstm_layers = int(config['PARAMETER']['lstm_layers'])
         self.lstm_hidden_dim = int(config['PARAMETER']['lstm_hidden_dim'])
@@ -60,8 +62,8 @@ class BiLSTMClassifier(nn.ModuleList):
         # get the output of embedding layer
         embedding_out = self.embedding(x)
         # initialize the hidden state and cell state
-        h = torch.zeros((self.lstm_layers * 2, x.size(0), self.lstm_hidden_dim))
-        c = torch.zeros((self.lstm_layers * 2, x.size(0), self.lstm_hidden_dim))
+        h = torch.zeros((self.lstm_layers * 2, x.size(0), self.lstm_hidden_dim)).to(self.device)
+        c = torch.zeros((self.lstm_layers * 2, x.size(0), self.lstm_hidden_dim)).to(self.device)
         # get the output of lstm layer
         lstm_out, (hidden, cell) = self.lstm(embedding_out, (h, c))
         lstm_out = lstm_out[:, -1, :]  # get the hidden state of the last time step
@@ -72,8 +74,9 @@ class BiLSTMClassifier(nn.ModuleList):
 
 
 class BowBiLSTMClassifier(nn.ModuleList):
-    def __init__(self, config, num_words, embedding_matrix=None):
+    def __init__(self, config, num_words, embedding_matrix=None, device=None):
         super().__init__()
+        self.device = device
         # same structure with BiLSTM model except for the input neurons of fully connected layer
         self.embedding_dim = int(config['PARAMETER']['embedding_dim'])
         self.lstm_layers = int(config['PARAMETER']['lstm_layers'])
@@ -94,8 +97,8 @@ class BowBiLSTMClassifier(nn.ModuleList):
                                                out_features=50)
 
     def forward(self, x):
-        h = torch.zeros((self.lstm_layers * 2, x.size(0), self.lstm_hidden_dim))
-        c = torch.zeros((self.lstm_layers * 2, x.size(0), self.lstm_hidden_dim))
+        h = torch.zeros((self.lstm_layers * 2, x.size(0), self.lstm_hidden_dim)).to(self.device)
+        c = torch.zeros((self.lstm_layers * 2, x.size(0), self.lstm_hidden_dim)).to(self.device)
 
         embedding_out = self.embedding(x)
 
