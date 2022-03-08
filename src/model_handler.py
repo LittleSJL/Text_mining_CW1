@@ -14,7 +14,7 @@ class ModelHandler:
         self.config = config
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.model = None
-        # used to store the model weights that achieve the best f1 score on development during training
+        # used to store the model weights that achieve the best accuracy on development during training
         self.best_model_state = None
         self.build_model(num_words, embedding_matrix, model_path)
 
@@ -42,15 +42,15 @@ class ModelHandler:
         # specify loss criteria and optimizer
         loss_function = torch.nn.CrossEntropyLoss()
         optimizer = torch.optim.Adam(self.model.parameters(), lr=float(self.config['PARAMETER']['learning_rate']))
-        # store the best f1 score on development set, which will be use for early stopping
-        best_dev_f1 = 0
+        # store the best accuracy on development set, which will be use for early stopping
+        best_dev_acc = 0
         early_stopping_counter = 0
 
         print('-------------------Start training-------------------')
         for epoch in range(int(self.config['PARAMETER']['epochs'])):
             self.model.train()
             loss_list = []
-            f1_list = []
+            accuracy_list = []
             for x_batch, y_batch in loader_training:
                 x_batch = x_batch.to(self.device)
                 y_batch = y_batch.to(self.device)
@@ -61,39 +61,39 @@ class ModelHandler:
                 optimizer.zero_grad()
                 loss.backward()
                 optimizer.step()
-                # calculate and store the f1 score as well as loss during training
-                f1_training = evaluate_during_training(y_pred, y_batch)
-                f1_list.append(f1_training)
+                # calculate and store the accuracy as well as loss during training
+                accuracy_training, f1_training = evaluate_during_training(y_pred, y_batch)
+                accuracy_list.append(accuracy_training)
                 loss_list.append(loss.cpu().detach().numpy())
-            # loss and f1 score on training set
+            # loss and accuracy on training set
             loss_train = sum(loss_list) / len(loss_list)
-            f1_train = sum(f1_list) / len(f1_list)
+            accuracy_train = sum(accuracy_list) / len(accuracy_list)
             # test the model on development set
             x_dev = x_dev.to(self.device)
             y_dev = y_dev.to(self.device)
             pred_dev = self.predict(x_dev)
-            f1_dev = evaluate_during_training(pred_dev, y_dev)
+            accuracy_dev, f1_dev = evaluate_during_training(pred_dev, y_dev)
 
-            # update training states for f1 score and early stopping
-            if f1_dev > best_dev_f1:
+            # update training states for accuracy and early stopping
+            if accuracy_dev > best_dev_acc:
                 """
-                if the current f1 score is better than the best f1 score before,
+                if the current accuracy is better than the best accuracy before,
                 then clear early stopping counter and update the model weights (always store the weights of best model)
                 """
-                best_dev_f1 = f1_dev
+                best_dev_acc = accuracy_dev
                 early_stopping_counter = 0
                 self.best_model_state = self.model.state_dict()
             else:
                 # else, increase the early_stopping_counter
                 early_stopping_counter += 1
-            print("Epoch: %d, loss: %.5f, Train f1 score: %.5f, Dev f1 score: %.5f, Early stopping: %d" %
-                  (epoch + 1, loss_train, f1_train, f1_dev, early_stopping_counter))
+            print("Epoch: %d, loss: %.5f, Train accuracy: %.5f, Dev accuracy: %.5f, Early stopping: %d" %
+                  (epoch + 1, loss_train, accuracy_train, accuracy_dev, early_stopping_counter))
             if early_stopping_counter >= int(self.config['PARAMETER']['early_stopping']):
-                # stop training if the best f1 score is not updated for a number of epochs (pre-defined)
+                # stop training if the best accuracy is not updated for a number of epochs (pre-defined)
                 print('Early stop training...')
                 break
         print('-------------------End training-------------------')
-        print("Best f1 score on development set:", best_dev_f1)
+        print("Best accuracy on development set:", best_dev_acc)
         self.save_model()
 
     def predict(self, x_test):

@@ -1,29 +1,29 @@
-Accuracy on test set: 0.776
-Micro F1-score on test set: 0.776
-Macro F1-score on test set: 0.6374217236153217
-Weighted F1-score on test set: 0.7573105223026249
+Accuracy on test set: 0.784
+Micro F1-score on test set: 0.7840000000000001
+Macro F1-score on test set: 0.6376578091342101
+Weighted F1-score on test set: 0.7710134369614469
 
 ABBR:abb: 0.0
 ENTY:cremat: 0.0
 ENTY:event: 0.0
+ENTY:letter: 0.0
 ENTY:product: 0.0
 HUM:title: 0.0
 ENTY:other: 0.2105263157894737
-ENTY:substance: 0.2105263157894737
-DESC:desc: 0.2857142857142857
-ENTY:termeq: 0.30769230769230765
+DESC:desc: 0.23529411764705882
+ENTY:substance: 0.4
 NUM:other: 0.4444444444444444
+ENTY:termeq: 0.4615384615384615
 ENTY:body: 0.5
 ENTY:dismed: 0.5
-NUM:money: 0.5
+HUM:gr: 0.5454545454545454
+LOC:state: 0.5714285714285714
 DESC:manner: 0.5714285714285715
-NUM:perc: 0.5714285714285715
-HUM:gr: 0.6
-LOC:state: 0.6153846153846153
 HUM:desc: 0.6666666666666666
 LOC:mount: 0.6666666666666666
-ENTY:plant: 0.7499999999999999
-NUM:temp: 0.7499999999999999
+NUM:money: 0.6666666666666666
+NUM:perc: 0.6666666666666666
+LOC:country: 0.7499999999999999
 NUM:count: 0.761904761904762
 LOC:city: 0.7647058823529411
 ENTY:animal: 0.7692307692307693
@@ -31,15 +31,16 @@ NUM:dist: 0.7692307692307693
 NUM:period: 0.7777777777777777
 ABBR:exp: 0.7999999999999999
 DESC:reason: 0.8
-LOC:other: 0.826923076923077
-DESC:def: 0.8327402135231317
+LOC:other: 0.8349514563106797
+DESC:def: 0.8467153284671532
 ENTY:food: 0.8571428571428571
-LOC:country: 0.8571428571428571
 NUM:weight: 0.8571428571428571
 HUM:ind: 0.8717948717948718
+ENTY:plant: 0.888888888888889
+NUM:temp: 0.888888888888889
 ENTY:currency: 0.9090909090909091
 NUM:speed: 0.9090909090909091
-NUM:date: 0.9473684210526315
+NUM:date: 0.9462365591397849
 ENTY:color: 0.9473684210526316
 ENTY:instru: 1.0
 ENTY:lang: 1.0
@@ -49,7 +50,7 @@ ENTY:veh: 1.0
 
 Sentence                                                                                    (True label, Prediction)
 How far is it from Denver to Aspen ?                                                        (NUM:dist, NUM:dist)
-What county is Modesto , California in ?                                                    (LOC:city, DESC:def)
+What county is Modesto , California in ?                                                    (LOC:city, LOC:other)
 Who was Galileo ?                                                                           (HUM:desc, HUM:desc)
 What is an atom ?                                                                           (DESC:def, DESC:def)
 When did Hawaii become a state ?                                                            (NUM:date, NUM:date)
@@ -81,19 +82,19 @@ What hemisphere is the Philippines in ?                                         
 What is the average speed of the horses at the Kentucky Derby ?                             (NUM:speed, NUM:other)
 Where are the Rocky Mountains ?                                                             (LOC:mount, LOC:other)
 What are invertebrates ?                                                                    (DESC:def, DESC:def)
-What is the temperature at the center of the earth ?                                        (NUM:temp, LOC:other)
+What is the temperature at the center of the earth ?                                        (NUM:temp, NUM:temp)
 When did John F. Kennedy get elected as President ?                                         (NUM:date, NUM:date)
 How old was Elvis Presley when he died ?                                                    (NUM:period, NUM:period)
 Where is the Orinoco River ?                                                                (LOC:other, LOC:other)
 How far is the service line from the net in tennis ?                                        (NUM:dist, NUM:dist)
 How much fiber should you have per day ?                                                    (NUM:count, NUM:count)
 How many Great Lakes are there ?                                                            (NUM:count, NUM:count)
-Material called linen is made from what plant ?                                             (ENTY:plant, ENTY:substance)
+Material called linen is made from what plant ?                                             (ENTY:plant, ENTY:plant)
 What is Teflon ?                                                                            (DESC:def, DESC:def)
 What is amitriptyline ?                                                                     (DESC:def, DESC:def)
 What is a shaman ?                                                                          (DESC:def, DESC:def)
 What is the proper name for a female walrus ?                                               (ENTY:animal, HUM:ind)
-What is a group of turkeys called ?                                                         (ENTY:animal, ENTY:termeq)
+What is a group of turkeys called ?                                                         (ENTY:animal, HUM:gr)
 How long did Rip Van Winkle sleep ?                                                         (NUM:period, NUM:period)
 What are triglycerides ?                                                                    (DESC:def, DESC:def)
 How many liters in a gallon ?                                                               (NUM:count, NUM:count)
@@ -103,7 +104,7 @@ Who discovered x-rays ?                                                         
 Which comedian 's signature line is `` Can we talk '' ?                                     (HUM:ind, HUM:ind)
 What is fibromyalgia ?                                                                      (DESC:def, DESC:def)
 What is done with worn or outdated flags ?                                                  (DESC:desc, DESC:def)
-What does cc in engines mean ?                                                              (DESC:def, DESC:def)
+What does cc in engines mean ?                                                              (DESC:def, DESC:desc)
 When did Elvis Presley die ?                                                                (NUM:date, NUM:date)
 What is the capital of Yugoslavia ?                                                         (LOC:city, LOC:city)
 Where is Milan ?                                                                            (LOC:city, LOC:other)
@@ -141,7 +142,7 @@ What country did Ponce de Leon come from ?                                      
 The U.S. Department of Treasury first issued paper currency for the U.S. during which war ? (ENTY:event, LOC:city)
 What is desktop publishing ?                                                                (DESC:def, DESC:def)
 What is the temperature of the sun 's surface ?                                             (NUM:temp, NUM:temp)
-What year did Canada join the United Nations ?                                              (NUM:date, NUM:date)
+What year did Canada join the United Nations ?                                              (NUM:date, LOC:country)
 What is the oldest university in the US ?                                                   (HUM:gr, LOC:other)
 Where is Prince Edward Island ?                                                             (LOC:other, LOC:other)
 Mercury , what year was it discovered ?                                                     (NUM:date, NUM:date)
@@ -152,7 +153,7 @@ What is neurology ?                                                             
 Who invented the calculator ?                                                               (HUM:ind, HUM:ind)
 How do you measure earthquakes ?                                                            (DESC:manner, DESC:manner)
 Who is Duke Ellington ?                                                                     (HUM:desc, HUM:ind)
-What county is Phoenix , AZ in ?                                                            (LOC:city, DESC:def)
+What county is Phoenix , AZ in ?                                                            (LOC:city, LOC:other)
 What is a micron ?                                                                          (DESC:def, DESC:def)
 The sun 's core , what is the temperature ?                                                 (NUM:temp, NUM:temp)
 What is the Ohio state bird ?                                                               (ENTY:animal, ENTY:animal)
@@ -181,7 +182,7 @@ What is the gestation period for a cat ?                                        
 How far is a nautical mile ?                                                                (NUM:dist, NUM:dist)
 Who was the abolitionist who led the raid on Harper 's Ferry in 1859 ?                      (HUM:ind, HUM:ind)
 What does target heart rate mean ?                                                          (DESC:def, NUM:perc)
-What was the first satellite to go into space ?                                             (ENTY:product, LOC:other)
+What was the first satellite to go into space ?                                             (ENTY:product, DESC:desc)
 What is foreclosure ?                                                                       (DESC:def, DESC:def)
 What is the major fault line near Kentucky ?                                                (ENTY:other, ENTY:other)
 Where is the Holland Tunnel ?                                                               (LOC:other, LOC:other)
@@ -198,7 +199,7 @@ Who is a German philosopher ?                                                   
 What were Christopher Columbus ' three ships ?                                              (ENTY:veh, ENTY:veh)
 What does Phi Beta Kappa mean ?                                                             (DESC:def, DESC:def)
 What is nicotine ?                                                                          (DESC:def, DESC:def)
-What is another name for vitamin B1 ?                                                       (ENTY:termeq, ENTY:other)
+What is another name for vitamin B1 ?                                                       (ENTY:termeq, ENTY:termeq)
 Who discovered radium ?                                                                     (HUM:ind, HUM:ind)
 What are sunspots ?                                                                         (DESC:def, DESC:def)
 When was Algeria colonized ?                                                                (NUM:date, NUM:date)
@@ -223,7 +224,7 @@ How fast is alcohol absorbed ?                                                  
 When is the summer solstice ?                                                               (NUM:date, NUM:date)
 What is supernova ?                                                                         (DESC:def, DESC:def)
 Where is the Shawnee National Forest ?                                                      (LOC:other, LOC:other)
-What U.S. state 's motto is `` Live free or Die '' ?                                        (LOC:state, LOC:other)
+What U.S. state 's motto is `` Live free or Die '' ?                                        (LOC:state, DESC:desc)
 Where is the Lourve ?                                                                       (LOC:other, LOC:other)
 When was the first stamp issued ?                                                           (NUM:date, NUM:date)
 What primary colors do you mix to make orange ?                                             (ENTY:color, ENTY:color)
@@ -234,7 +235,7 @@ Where is the Euphrates River ?                                                  
 What is cryptography ?                                                                      (DESC:def, DESC:def)
 What is natural gas composed of ?                                                           (ENTY:substance, DESC:def)
 Who is the Prime Minister of Canada ?                                                       (HUM:ind, HUM:ind)
-What French ruler was defeated at the battle of Waterloo ?                                  (HUM:ind, DESC:def)
+What French ruler was defeated at the battle of Waterloo ?                                  (HUM:ind, ENTY:other)
 What is leukemia ?                                                                          (DESC:def, DESC:def)
 Where did Howard Hughes die ?                                                               (LOC:other, LOC:other)
 What is the birthstone for June ?                                                           (ENTY:substance, DESC:def)
@@ -247,7 +248,7 @@ What city has the zip code of 35824 ?                                           
 What currency is used in Algeria ?                                                          (ENTY:currency, ENTY:currency)
 Who invented the hula hoop ?                                                                (HUM:ind, HUM:ind)
 What was the most popular toy in 1957 ?                                                     (ENTY:product, ENTY:other)
-What is pastrami made of ?                                                                  (ENTY:substance, DESC:def)
+What is pastrami made of ?                                                                  (ENTY:substance, ENTY:substance)
 What is the name of the satellite that the Soviet Union sent into space in 1957 ?           (ENTY:product, HUM:ind)
 What city 's newspaper is called `` The Enquirer '' ?                                       (LOC:city, LOC:city)
 Who invented the slinky ?                                                                   (HUM:ind, HUM:ind)
@@ -375,7 +376,7 @@ What color is yak milk ?                                                        
 What date was Dwight D. Eisenhower born ?                                                   (NUM:date, NUM:date)
 What does the technical term ISDN mean ?                                                    (ABBR:exp, DESC:def)
 Why is the sun yellow ?                                                                     (DESC:reason, DESC:reason)
-What is the conversion rate between dollars and pounds ?                                    (NUM:money, NUM:perc)
+What is the conversion rate between dollars and pounds ?                                    (NUM:money, NUM:money)
 When was Abraham Lincoln born ?                                                             (NUM:date, NUM:date)
 What is the Milky Way ?                                                                     (DESC:def, DESC:def)
 What is mold ?                                                                              (DESC:def, DESC:def)
@@ -448,7 +449,7 @@ What is myopia ?                                                                
 What is the sales tax rate in New York ?                                                    (NUM:other, NUM:money)
 Developing nations comprise what percentage of the world 's population ?                    (NUM:perc, NUM:perc)
 What is the fourth highest mountain in the world ?                                          (LOC:mount, LOC:mount)
-What is Shakespeare 's nickname ?                                                           (HUM:ind, DESC:def)
+What is Shakespeare 's nickname ?                                                           (HUM:ind, LOC:state)
 What is the heaviest naturally occurring element ?                                          (ENTY:substance, ENTY:other)
 When is Father 's Day ?                                                                     (NUM:date, NUM:date)
 What does the acronym NASA stand for ?                                                      (ABBR:exp, ABBR:exp)
@@ -459,7 +460,7 @@ Where is the Mason/Dixon line ?                                                 
 When was the Boston tea party ?                                                             (NUM:date, NUM:date)
 What is metabolism ?                                                                        (DESC:def, DESC:def)
 Which U.S.A. president appeared on `` Laugh-In '' ?                                         (HUM:ind, HUM:ind)
-What are cigarettes made of ?                                                               (ENTY:substance, DESC:def)
+What are cigarettes made of ?                                                               (ENTY:substance, ENTY:substance)
 What is the capital of Zimbabwe ?                                                           (LOC:city, LOC:city)
 What does NASA stand for ?                                                                  (ABBR:exp, ABBR:exp)
 What is the state flower of Michigan ?                                                      (ENTY:plant, ENTY:plant)
@@ -473,7 +474,7 @@ What are Canada 's two territories ?                                            
 What was the name of the plane Lindbergh flew solo across the Atlantic ?                    (ENTY:veh, ENTY:veh)
 What is genocide ?                                                                          (DESC:def, DESC:def)
 What continent is Argentina on ?                                                            (LOC:other, LOC:other)
-What monastery was raided by Vikings in the late eighth century ?                           (ENTY:other, NUM:date)
+What monastery was raided by Vikings in the late eighth century ?                           (ENTY:other, ENTY:letter)
 What is an earthquake ?                                                                     (DESC:def, DESC:def)
 Where is the tallest roller coaster located ?                                               (LOC:other, LOC:other)
 What are enzymes ?                                                                          (DESC:def, DESC:def)

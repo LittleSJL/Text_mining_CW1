@@ -46,7 +46,7 @@ def evaluate_during_training(one_hot_predict, one_hot_true):
     # calculate the accuracy and f1 score
     accuracy = accuracy_score(int_predict, int_true)
     weighted_f1 = f1_score(int_true, int_predict, average='weighted')
-    return weighted_f1
+    return accuracy, weighted_f1
 
 
 def plot_confusion_matrix_figure(true, predict, classes, save_img_path):
@@ -67,7 +67,7 @@ def plot_confusion_matrix_figure(true, predict, classes, save_img_path):
             plt.text(first_index, second_index, confusion_matrix_result[first_index][second_index],
                      ha='center', va='center')
     plt.savefig(fname=save_img_path)
-    plt.show()
+    # plt.show()
 
 
 class OutputHandler:

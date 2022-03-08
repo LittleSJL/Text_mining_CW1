@@ -1,0 +1,77 @@
+Embedding selection: Random initialize
+Freeze or fine-tune: Fine-tune
+Model selection: BoW
+-------------------Start training-------------------
+Epoch: 1, loss: 3.11113, Train accuracy: 0.23678, Dev accuracy: 0.33516, Early stopping: 0
+Epoch: 2, loss: 2.32458, Train accuracy: 0.45386, Dev accuracy: 0.51465, Early stopping: 0
+Epoch: 3, loss: 1.69812, Train accuracy: 0.62078, Dev accuracy: 0.60073, Early stopping: 0
+Epoch: 4, loss: 1.19927, Train accuracy: 0.74306, Dev accuracy: 0.64103, Early stopping: 0
+Epoch: 5, loss: 0.81870, Train accuracy: 0.83267, Dev accuracy: 0.68498, Early stopping: 0
+Epoch: 6, loss: 0.54743, Train accuracy: 0.89731, Dev accuracy: 0.72161, Early stopping: 0
+Epoch: 7, loss: 0.36744, Train accuracy: 0.93415, Dev accuracy: 0.73626, Early stopping: 0
+Epoch: 8, loss: 0.25209, Train accuracy: 0.95931, Dev accuracy: 0.74359, Early stopping: 0
+Epoch: 9, loss: 0.17830, Train accuracy: 0.97433, Dev accuracy: 0.74359, Early stopping: 1
+Epoch: 10, loss: 0.13045, Train accuracy: 0.98163, Dev accuracy: 0.73626, Early stopping: 2
+Epoch: 11, loss: 0.09810, Train accuracy: 0.98812, Dev accuracy: 0.73626, Early stopping: 3
+Epoch: 12, loss: 0.07551, Train accuracy: 0.99076, Dev accuracy: 0.74908, Early stopping: 0
+Epoch: 13, loss: 0.05957, Train accuracy: 0.99432, Dev accuracy: 0.75092, Early stopping: 0
+Epoch: 14, loss: 0.04810, Train accuracy: 0.99533, Dev accuracy: 0.74542, Early stopping: 1
+Epoch: 15, loss: 0.03965, Train accuracy: 0.99614, Dev accuracy: 0.74725, Early stopping: 2
+Epoch: 16, loss: 0.03329, Train accuracy: 0.99675, Dev accuracy: 0.74542, Early stopping: 3
+Epoch: 17, loss: 0.02837, Train accuracy: 0.99756, Dev accuracy: 0.75092, Early stopping: 4
+Epoch: 18, loss: 0.02451, Train accuracy: 0.99777, Dev accuracy: 0.75275, Early stopping: 0
+Epoch: 19, loss: 0.02141, Train accuracy: 0.99797, Dev accuracy: 0.75092, Early stopping: 1
+Epoch: 20, loss: 0.01888, Train accuracy: 0.99797, Dev accuracy: 0.74725, Early stopping: 2
+Epoch: 21, loss: 0.01680, Train accuracy: 0.99797, Dev accuracy: 0.74725, Early stopping: 3
+Epoch: 22, loss: 0.01506, Train accuracy: 0.99797, Dev accuracy: 0.74725, Early stopping: 4
+Epoch: 23, loss: 0.01359, Train accuracy: 0.99817, Dev accuracy: 0.74908, Early stopping: 5
+Epoch: 24, loss: 0.01233, Train accuracy: 0.99838, Dev accuracy: 0.74908, Early stopping: 6
+Epoch: 25, loss: 0.01126, Train accuracy: 0.99858, Dev accuracy: 0.75092, Early stopping: 7
+Epoch: 26, loss: 0.01034, Train accuracy: 0.99858, Dev accuracy: 0.75458, Early stopping: 0
+Epoch: 27, loss: 0.00955, Train accuracy: 0.99878, Dev accuracy: 0.75275, Early stopping: 1
+Epoch: 28, loss: 0.00887, Train accuracy: 0.99878, Dev accuracy: 0.75824, Early stopping: 0
+Epoch: 29, loss: 0.00827, Train accuracy: 0.99878, Dev accuracy: 0.76190, Early stopping: 0
+Epoch: 30, loss: 0.00776, Train accuracy: 0.99878, Dev accuracy: 0.76190, Early stopping: 1
+Epoch: 31, loss: 0.00730, Train accuracy: 0.99878, Dev accuracy: 0.75824, Early stopping: 2
+Epoch: 32, loss: 0.00690, Train accuracy: 0.99899, Dev accuracy: 0.76007, Early stopping: 3
+Epoch: 33, loss: 0.00654, Train accuracy: 0.99899, Dev accuracy: 0.76007, Early stopping: 4
+Epoch: 34, loss: 0.00622, Train accuracy: 0.99899, Dev accuracy: 0.76007, Early stopping: 5
+Epoch: 35, loss: 0.00594, Train accuracy: 0.99899, Dev accuracy: 0.76007, Early stopping: 6
+Epoch: 36, loss: 0.00569, Train accuracy: 0.99899, Dev accuracy: 0.75824, Early stopping: 7
+Epoch: 37, loss: 0.00546, Train accuracy: 0.99899, Dev accuracy: 0.75824, Early stopping: 8
+Epoch: 38, loss: 0.00526, Train accuracy: 0.99899, Dev accuracy: 0.76007, Early stopping: 9
+Epoch: 39, loss: 0.00508, Train accuracy: 0.99899, Dev accuracy: 0.75092, Early stopping: 10
+Epoch: 40, loss: 0.00492, Train accuracy: 0.99899, Dev accuracy: 0.74908, Early stopping: 11
+Epoch: 41, loss: 0.00477, Train accuracy: 0.99899, Dev accuracy: 0.74542, Early stopping: 12
+Epoch: 42, loss: 0.00464, Train accuracy: 0.99899, Dev accuracy: 0.73993, Early stopping: 13
+Epoch: 43, loss: 0.00452, Train accuracy: 0.99899, Dev accuracy: 0.71245, Early stopping: 14
+Epoch: 44, loss: 0.00442, Train accuracy: 0.99899, Dev accuracy: 0.70696, Early stopping: 15
+Epoch: 45, loss: 0.00432, Train accuracy: 0.99899, Dev accuracy: 0.70513, Early stopping: 16
+Epoch: 46, loss: 0.00423, Train accuracy: 0.99899, Dev accuracy: 0.70330, Early stopping: 17
+Epoch: 47, loss: 0.00415, Train accuracy: 0.99899, Dev accuracy: 0.70513, Early stopping: 18
+Epoch: 48, loss: 0.00408, Train accuracy: 0.99899, Dev accuracy: 0.70147, Early stopping: 19
+Epoch: 49, loss: 0.00401, Train accuracy: 0.99899, Dev accuracy: 0.70147, Early stopping: 20
+Epoch: 50, loss: 0.00394, Train accuracy: 0.99899, Dev accuracy: 0.69963, Early stopping: 21
+Epoch: 51, loss: 0.00388, Train accuracy: 0.99899, Dev accuracy: 0.69963, Early stopping: 22
+Epoch: 52, loss: 0.00383, Train accuracy: 0.99899, Dev accuracy: 0.69597, Early stopping: 23
+Epoch: 53, loss: 0.00378, Train accuracy: 0.99899, Dev accuracy: 0.69597, Early stopping: 24
+Epoch: 54, loss: 0.00373, Train accuracy: 0.99899, Dev accuracy: 0.69780, Early stopping: 25
+Epoch: 55, loss: 0.00369, Train accuracy: 0.99899, Dev accuracy: 0.69780, Early stopping: 26
+Epoch: 56, loss: 0.00365, Train accuracy: 0.99899, Dev accuracy: 0.69780, Early stopping: 27
+Epoch: 57, loss: 0.00362, Train accuracy: 0.99899, Dev accuracy: 0.69780, Early stopping: 28
+Epoch: 58, loss: 0.00359, Train accuracy: 0.99899, Dev accuracy: 0.69597, Early stopping: 29
+Epoch: 59, loss: 0.00357, Train accuracy: 0.99899, Dev accuracy: 0.69597, Early stopping: 30
+Epoch: 60, loss: 0.00356, Train accuracy: 0.99899, Dev accuracy: 0.69597, Early stopping: 31
+Epoch: 61, loss: 0.00355, Train accuracy: 0.99899, Dev accuracy: 0.69414, Early stopping: 32
+Epoch: 62, loss: 0.00356, Train accuracy: 0.99899, Dev accuracy: 0.69414, Early stopping: 33
+Epoch: 63, loss: 0.00357, Train accuracy: 0.99899, Dev accuracy: 0.69414, Early stopping: 34
+Epoch: 64, loss: 0.00359, Train accuracy: 0.99899, Dev accuracy: 0.69780, Early stopping: 35
+Epoch: 65, loss: 0.00361, Train accuracy: 0.99878, Dev accuracy: 0.69780, Early stopping: 36
+Epoch: 66, loss: 0.00364, Train accuracy: 0.99878, Dev accuracy: 0.69597, Early stopping: 37
+Epoch: 67, loss: 0.00365, Train accuracy: 0.99878, Dev accuracy: 0.69780, Early stopping: 38
+Epoch: 68, loss: 0.00365, Train accuracy: 0.99878, Dev accuracy: 0.69780, Early stopping: 39
+Epoch: 69, loss: 0.00363, Train accuracy: 0.99878, Dev accuracy: 0.69780, Early stopping: 40
+Early stop training...
+-------------------End training-------------------
+Best accuracy on development set: 0.7619047619047619
+Saving the best model to ../data/bow_random_finetune.pt

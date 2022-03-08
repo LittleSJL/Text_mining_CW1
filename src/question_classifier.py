@@ -4,7 +4,7 @@ from input_handler import load_config_file, InputHandler
 
 
 # read configuration file
-config_path = "../data/bow_glove_finetune.ini"
+config_path = "../data/bowbilstm_glove_finetune.ini"
 config = load_config_file(config_path)
 # build input_handler
 input_handler = InputHandler(config)
