@@ -77,7 +77,7 @@ Therefore, the results of BoW models may be different from that in our paper rep
 In order to identify the model directly from the file name, the model information
 is used to name all its corresponding files.
 
-Taking `BoW model, use Glove embedding, freeze the embedding during training` as an example,
+Taking `BoW model, use Glove embedding, freeze the embedding` as an example,
 - configuration file: bow_glove_freeze.ini
 - model: bow_glove_freeze.pt
 - result file: result_bow_glove_freeze.txt
