@@ -4,15 +4,11 @@ from input_handler import load_config_file, InputHandler
 
 
 # read configuration file
-config_path = "../data/bowbilstm_glove_finetune.ini"
+config_path = "../data/bow_random_finetune.ini"
 config = load_config_file(config_path)
 # build input_handler
 input_handler = InputHandler(config)
 
-"""
-Firstly set is_training = True: run the code to train and save the model.
-Then set is_training = False: run the code to load, test the model and write the evaluation results
-"""
 is_training = False
 if is_training:
     # load and pre-process the training data and dev data for training
