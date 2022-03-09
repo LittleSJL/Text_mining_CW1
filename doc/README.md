@@ -14,10 +14,10 @@ There are three folders:
 
 # Instructions on how to use the code
 There are two phases that you can choose: train and test.
-- To train a model, run `python question_classifier.py --train --config [configuration_file_path]`
+- To train a model, run `python3 question_classifier.py --train --config [configuration_file_path]`
 	- `During training`: the system will print the training loss, training accuracy, dev accuracy and early stopping counter of each epoch.
 	- `After training`: the best model will be saved (the best accuracy on dev set).
-- To test the model, run `python question_classifier.py --test --config [configuration_file_path]`
+- To test the model, run `python3 question_classifier.py --test --config [configuration_file_path]`
 	- `During testing`: the system will print the test accuracy, three types of F1 score and plot confusion matrix image. 
 	- `After testing`: the following results will be saved to the data folder:
 		- text results: 
@@ -81,7 +81,7 @@ Taking `BoW model, use Glove embedding, freeze the embedding` as an example,
 - configuration file: `bow_glove_freeze.ini`
 - model: `bow_glove_freeze.pt`
 - result file: `result_bow_glove_freeze.txt`
-- confusion matrix image: `confusion_matrix_bow_glove_freeze.jpg`
+- confusion matrix image: `confusion_matrix_bow_glove_freeze.png`
 
 
 

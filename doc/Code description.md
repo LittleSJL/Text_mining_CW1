@@ -103,7 +103,7 @@ The main functions of this module are as follows:
 - `get_id_to_label(path)`: create a id_to_label dictionary that maps a unique id to its text label.
 - `build_classes(int_predict, int_true, id_to_label)`: get the text classes used for plotting confusion matrix and displaying f1 score of each class.
 - `evaluate_during_training(one_hot_predict, one_hot_true)`: used for calculating the accuracy and f1 score during training.
-- `plot_confusion_matrix_figure(true, predict, classes, save_img_path)`: plot, display and save the confusion matrix image.
+- `plot_confusion_matrix_figure(true, predict, classes, save_img_path)`: plot and save the confusion matrix image.
 #### Class
 `OutHandler`
 #### Function inside the class
@@ -111,7 +111,7 @@ The main functions of this module are as follows:
 - `result_evaluation(self, one_hot_predict, one_hot_true)`: evaluate the model based on the predictions and true labels.
     - calculate the accuracy, three types of F1 score (micro, macro, weighted).
     - calculate F1 score for each class.
-    - calculate the confusion matrix.
+    - calculate the confusion matrix and save the image.
 - `write_result(self)`: write the evaluation results into files.
 	- accuracy and three types of F1 score (micro, macro, weighted).
 	- f1 score of each class in ascending order.
