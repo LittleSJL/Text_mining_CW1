@@ -6,7 +6,7 @@ from sklearn.metrics import f1_score, accuracy_score, confusion_matrix
 
 def transform_output(one_hot_predict, one_hot_true):
     """
-    transform one-hot encoding tensor to numpy int label
+    transform one-hot encoding tensor to numpy int text label
     """
     prediction = one_hot_predict.cpu().detach().numpy()  # convert tensor to numpy
     prediction = np.argmax(prediction, axis=1)  # select the largest probability as the prediction label
@@ -51,7 +51,7 @@ def evaluate_during_training(one_hot_predict, one_hot_true):
 
 def plot_confusion_matrix_figure(true, predict, classes, save_img_path):
     """
-    plot, display and save the confusion matrix
+    plot, display and save the confusion matrix image
     """
     confusion_matrix_result = confusion_matrix(true, predict)
     plt.figure(figsize=(30, 30))
@@ -67,7 +67,7 @@ def plot_confusion_matrix_figure(true, predict, classes, save_img_path):
             plt.text(first_index, second_index, confusion_matrix_result[first_index][second_index],
                      ha='center', va='center')
     plt.savefig(fname=save_img_path)
-    # plt.show()
+    plt.show()
 
 
 class OutputHandler:
@@ -89,7 +89,7 @@ class OutputHandler:
         """
         Evaluate the model:
         (1) calculate the accuracy, three types of F1 score (micro, macro, weighted)
-        (2) F1 score for each class
+        (2) calculate F1 score for each class
         (3) calculate the confusion matrix
         """
         int_predict, int_true = transform_output(one_hot_predict, one_hot_true)

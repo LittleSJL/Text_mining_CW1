@@ -1,0 +1,4 @@
+Required libraries:
+matplotlib.pyplot # used for plotting the confusion matrix image
+sklearn.metrics (f1_score, accuracy_score, confusion_matrix) # used for evaluate the model
+
