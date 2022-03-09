@@ -114,7 +114,7 @@ The main functions of this module are as follows:
     - calculate the confusion matrix.
 - `write_result(self)`: write the evaluation results into files.
 	- accuracy and three types of F1 score (micro, macro, weighted).
-	- f1 score of each class.
+	- f1 score of each class in ascending order.
 	- the original sentences, prediction labels and true labels for each testing question.
 
 
