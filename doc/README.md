@@ -1,4 +1,12 @@
-﻿# Folder structure
+﻿# Group member
+- Jinliang Sun: 10907267
+- Jiaxin Guo: 10856460
+- Shuhao Qi: 10822869
+- Zirui Wang: 10868665
+- Yunzhou Yang: 10822773
+- Bo Shi: 10858935
+
+# Folder structure
 There are three folders:
 - `Document`: 
 	- `Code description.md`: descriptions for the functions in each code file in src folder.
@@ -26,7 +34,9 @@ There are two phases that you can choose: train and test.
 			- the original sentence, prediction label and true label for each testing question.
 		- image result: a 50*50 confusion matrix image.
 
-**Reminder**: Because there is no trained model in the data folder, you need to first train and save a model. If you run the test command without training first, the system will randomly initialize a new model and get poor evaluation results on the test set.
+**Reminder**: 
+- Before run the code to train the model, put the pre-trained glove embeddings to the path `data/glove.small.txt` (the glove.small in Blackboard is used in the experiment).
+- Because there is no trained model in the data folder, you need to first train and save a model. If you run the test command without training first, the system will randomly initialize a new model and get poor evaluation results on the test set.
 
 # Configuration files
 - `bow_random_finetune.ini`: BoW model, randomly initialize the embedding, finetune the embedding during training.
