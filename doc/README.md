@@ -8,16 +8,16 @@
 
 # Folder structure
 There are three folders:
-- `Document`: 
+- `doc`: 
 	- `Code description.md`: descriptions for the functions in each code file in src folder.
 	- `README.md` (this file): instructions on how to run the code.
 	- `requirements.txt`: required libraries.
-- `Data`: 
+- `data`: 
 	- `training_set.txt, test_set.txt`: training and test data set (dev set is generated during training).
 	- `9 configuration files` (e.g., `bow_glove_freeze.ini`).
 	- `stopwords.txt`: stores the stopwords.
 	- `map_char_to_id.pkl, label_to_id.pkl`: file that map words/labels to their unique id.
-- `Src`: the source code (the `Code description.md` will explain the its structure and details).
+- `src`: the source code (the `Code description.md` will explain the its structure and details).
 
 
 # Instructions on how to use the code
