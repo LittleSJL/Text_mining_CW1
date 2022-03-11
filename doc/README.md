@@ -78,11 +78,6 @@ There are two sections in a configuration file: `PATH` section and `PARAMETER` s
 	- `early_stopping`: the early stopping threshold to stopping training.
 	- `learning_rate`: the value of learning rate.
 	
-**Reminder**: the learning rates of three BoW models are 0.005 in the configuration files. 
-However, they are set as 0.001 in our experiment as it will achieve a final better performance.
-We finally set they as 0.005 in the submission because learning rate of 0.001 is unable to achieve more than 50% accuracy on dev set within 10 epochs.
-Therefore, the results of BoW models may be different from that in our paper report.
-	
 # File naming scheme
 In order to identify the model directly from the file name, the model information
 is used to name all its corresponding files.
